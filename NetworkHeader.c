@@ -12,7 +12,7 @@ void DieWithError(const char *msg)
 
 unsigned int getLength(char* field)
 {
-	printf("INT VERSION OF GETLENGTH GOT CALLED!!!!\n");
+	// printf("INT VERSION OF GETLENGTH GOT CALLED!!!!\n");
 	char firstBin[17]; char secondBin[9];
 	byte_to_binary(field[0], firstBin);
 	byte_to_binary(field[1], secondBin);

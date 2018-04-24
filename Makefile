@@ -2,7 +2,7 @@
 # Comments start with a pound sign
 
 # Macros
-CLIENT_SRCS=  Project4Client.c TCPClientUtility.c
+CLIENT_SRCS=  Project4Client.c
 SERVER_SRCS=  Project4Server.c HandleProj4Client.c
 SRCS=NetworkHeader.c Database.c
 HDRS=NetworkHeader.h WhoHeader.h
