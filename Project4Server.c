@@ -65,7 +65,7 @@ int main (int argc, char *argv[])
     if (returnValue != 0)
       DieWithError("pthread_create() failed");
 
-    free(threadArgs);
+    // free(threadArgs);
     // clntSock is connected to a client
 
   }
