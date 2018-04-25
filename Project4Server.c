@@ -1,5 +1,18 @@
 
 #include "NetworkHeader.h"
+char* databaseName = DATABASE_NAME; // Database
+
+struct ThreadArgs {
+  int clntSock; // Socket descriptor for client
+};
+
+void *handleThread(void *threadArgs){
+  pthread_detach(pthread_self());
+  int clntSock = ((struct ThreadArgs *) threadArgs)->clntSock;
+  free(threadArgs); // Deallocate memory for argument
+  HandleProj4Client(clntSock, databaseName);
+  return NULL;
+}
 
 int main (int argc, char *argv[])
 {
@@ -9,7 +22,6 @@ int main (int argc, char *argv[])
     exit(1);
   } 
 
-  char* databaseName = DATABASE_NAME; // Database
   in_port_t servPort = atoi(argv[2]); // Local port
 
   // Create socket for incoming connections
@@ -39,13 +51,21 @@ int main (int argc, char *argv[])
     socklen_t clntAddrLen = sizeof(clntAddr);
 
     // Wait for a client to connect
-    int clntSock = accept(servSock, (struct sockaddr *) &clntAddr, &clntAddrLen);
-    if (clntSock < 0)
+    // int clntSock = accept(servSock, (struct sockaddr *) &clntAddr, &clntAddrLen);
+    int clntSock= accept(servSock, (struct sockaddr *) &clntAddr, &clntAddrLen);
+    if (clntSock < 0){
       DieWithError("accept() failed");
+    }
+    struct ThreadArgs *threadArgs = (struct ThreadArgs *) malloc(sizeof(struct ThreadArgs));
+    pthread_t thread_id;
+    if (threadArgs == NULL)
+      DieWithError("malloc() failed");
+    threadArgs->clntSock = clntSock;
+    int returnValue = pthread_create(&thread_id, NULL, handleThread, threadArgs);
+    if (returnValue != 0)
+      DieWithError("pthread_create() failed");
 
     // clntSock is connected to a client
-
-    HandleProj4Client(clntSock, databaseName);
 
   }
 

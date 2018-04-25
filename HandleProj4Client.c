@@ -3,7 +3,7 @@
 #include "WhoHeader.h"
 
 // receives and sets response packet to response
-unsigned long receiveResponse(int sock, char* response);
+// unsigned long receiveResponse(int sock, char* response);
 
 void HandleProj4Client(int cliSock, char *databaseName)
 {

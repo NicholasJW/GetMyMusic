@@ -7,7 +7,7 @@ SERVER_SRCS=  Project4Server.c HandleProj4Client.c
 SRCS=NetworkHeader.c Database.c
 HDRS=NetworkHeader.h WhoHeader.h
 CFLAGS= -Wall -g
-LFLAGS= 
+LFLAGS= -lpthread
 CC= gcc -std=gnu11
 
 #All commands must start with a tab (not spaces)
