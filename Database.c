@@ -35,7 +35,7 @@ void open_database(char* filename)
 ****************************************************************************************************************/
 void close_database() 
 {
-  fclose(filePointer);
+  // fclose(filePointer);
   int i;
   for (i = 0; i < numEntries; i++)
   {
