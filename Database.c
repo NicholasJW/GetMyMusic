@@ -496,7 +496,7 @@ void storeSong(char* songName, char* song, int numBytes)
     exit(1);
   }
 
-	printf("song in storeSong\n");
+	// printf("song in storeSong\n");
   int i;
   for (i = 0; i < numBytes; i++)
   {
