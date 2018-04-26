@@ -464,7 +464,8 @@ int fileExists(char* fileName)
 void getSong(char* songName, char* song, int* numBytes)
 {
   FILE* file;
-  if ( (file = fopen(songName, "r+")) == NULL )
+  char* tempDir = strdup(songDir);
+  if ( (file = fopen(strcat(tempDir, songName), "r+")) == NULL )
   {
     fprintf(stderr, "Error: Can't open file %s\n", songName);
     exit(1);
@@ -488,7 +489,8 @@ void getSong(char* songName, char* song, int* numBytes)
 void storeSong(char* songName, char* song, int numBytes)
 {
   FILE* file;
-  if ( (file = fopen(strcat(songDir, songName), "ab+")) == NULL )
+  char* tempDir = strdup(songDir);
+  if ( (file = fopen(strcat(tempDir, songName), "ab+")) == NULL )
   {
     fprintf(stderr, "Error: Can't open file %s\n", songName);
     exit(1);
