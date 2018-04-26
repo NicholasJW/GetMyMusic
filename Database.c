@@ -11,6 +11,7 @@
 static FILE* filePointer;
 static char* songList[MAX_NUM_RECORDS]; // list of song:sha pairings in local database
 static int numEntries; // number of entries in local database
+static char* songDir;
 
 void sync_database(char* dir){
   char cwd[1024];
@@ -36,7 +37,7 @@ void open_database(char* filename, char* dir)
     fprintf(stderr, "Error: Can't open file %s\n", filename);
     exit(1);
   }
-
+  strcpy(songDir, dir);
   sync_database(dir);
   intializeSongList();
   printf("Number of songs: %d\n", numEntries);
@@ -485,7 +486,7 @@ void getSong(char* songName, char* song, int* numBytes)
 void storeSong(char* songName, char* song, int numBytes)
 {
   FILE* file;
-  if ( (file = fopen(songName, "w")) == NULL )
+  if ( (file = fopen(strcat(songDir, songName), "ab+")) == NULL )
   {
     fprintf(stderr, "Error: Can't open file %s\n", songName);
     exit(1);
