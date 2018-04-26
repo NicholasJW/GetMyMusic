@@ -12,21 +12,39 @@ static FILE* filePointer;
 static char* songList[MAX_NUM_RECORDS]; // list of song:sha pairings in local database
 static int numEntries; // number of entries in local database
 
+void sync_database(char* dir){
+  char cwd[1024];
+  if (getcwd(cwd, sizeof(cwd)) != NULL){
+    // fprintf(stdout, "Current working dir: %s\n", cwd);
+    strcat(cwd, "/syncData ");
+    strcat(cwd, dir);
+    // Call the script and make it generate the database file
+    system(cwd);
+  }
+  else
+    perror("getcwd() error");
+}
 
 /****************************************************************************************************************
 * Opens the local database where song:SHA pairings are stored and stores them in the classwide array.
 * Parameter is the filename of the local database. If the filename is not found an error message is displayed
 * and the program exits execution.
 ****************************************************************************************************************/
-void open_database(char* filename) 
+void open_database(char* filename, char* dir) 
 {
   if ( (filePointer = fopen(filename,"r+")) == NULL ) {
     fprintf(stderr, "Error: Can't open file %s\n", filename);
     exit(1);
   }
 
+  sync_database(dir);
   intializeSongList();
+  printf("Number of songs: %d\n", numEntries);
+  // Debug
+  exit(1);
 }
+
+
 
 
 /****************************************************************************************************************
@@ -74,7 +92,7 @@ void intializeSongList()
       sprintf(songList[(numEntries)++],"%s:%s", firstField, secondField);
 
   }
-
+  
 }
 
 

@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Get in to directories
+cd $1
+datafile=../database.dat
+# Clear out
+>$datafile
+
+for file in *; do
+    # echo $file;
+    # cat $datafile
+    sum="$(sha512sum $file)"
+    sum="$(echo $sum | cut -c1-128)"
+    sum="$file:$sum"
+    echo $sum >> $datafile
+done

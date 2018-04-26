@@ -8,7 +8,7 @@
 void HandleProj4Client(int cliSock, char *databaseName)
 {
 	// open database file
-	open_database(databaseName);
+	open_database(databaseName, "serverSong/");
 
 	for (;;) // breaks when leave message is received
 	{

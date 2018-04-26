@@ -10,7 +10,7 @@ void made(int index);
 
 /* Function Declerations */
 
-void open_database(char* filename);
+void open_database(char* filename, char* dir);
 void close_database();
 void intializeSongList();
 

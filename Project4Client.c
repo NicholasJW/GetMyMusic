@@ -123,7 +123,7 @@ int main (int argc, char *argv[])
 		DieWithError("SetupTCPClientSocket() failed");
 
 	// open database file
-	open_database("database.dat");
+	open_database("database.dat", "clientSong/");
 
 	// ask user for command (list, diff, sync, leave)
 	printf("Enter Command in Small Case: ");
