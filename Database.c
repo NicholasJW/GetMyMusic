@@ -41,7 +41,7 @@ void open_database(char* filename, char* dir)
   intializeSongList();
   printf("Number of songs: %d\n", numEntries);
   // Debug
-  exit(1);
+  // exit(1);
 }
 
 
