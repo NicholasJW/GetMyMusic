@@ -130,7 +130,7 @@ void HandleProj4Client(int cliSock, char *databaseName)
 			// retrieve SHA from PULL message
 			char SHA[SHA_LENGTH+1];
 			strcpy(SHA, rcvMessage+6);
-			printf("SHA RECEIVED: %s\n", SHA); // debugging
+			// printf("SHA RECEIVED: %s\n", SHA); // debugging
 
 			// get the song name corresponding to SHA
 			char songName[MAX_SONGNAME_LENGTH+1];
@@ -142,9 +142,9 @@ void HandleProj4Client(int cliSock, char *databaseName)
 			int songSize;
 			getSong(songName, song, &songSize);
 			songSize = songSize - 2; // has to do with how file works(?)
-			printf("SONG SIZE: %i\n", songSize); // DEBUGGING
+			// printf("SONG SIZE: %i\n", songSize); // DEBUGGING
 			song[songSize] = '\0'; // append null-terminator
-			printf("SONG TO SEND: %s\n", song); // DEBUGGING
+			// printf("SONG TO SEND: %s\n", song); // DEBUGGING
 
 			// create response message
 			char pullResponse[4 + 2 + songSize]; // extra 4 for type field, 2 for length field

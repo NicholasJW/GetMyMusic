@@ -466,12 +466,12 @@ void sendLIST(int sock)
 	listMessage[5] = 0x0;
 
 	// printf("LIST TYPE??: ");
-	int i;
-	for (i = 0; i < 4; i++)
-	{
-		printf("%c", listMessage[i]);
-	}
-	printf("\n");
+	// int i;
+	// for (i = 0; i < 4; i++)
+	// {
+	// 	printf("%c", listMessage[i]);
+	// }
+	// printf("\n");
 	
 	// send LIST message to server
 	ssize_t numBytesSent = send(sock, listMessage, 4+2, 0);
