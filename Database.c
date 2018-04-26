@@ -37,7 +37,9 @@ void open_database(char* filename, char* dir)
     fprintf(stderr, "Error: Can't open file %s\n", filename);
     exit(1);
   }
-  strcpy(songDir, dir);
+
+  // strcpy(songDir, dir);
+  songDir = strdup(dir);
   sync_database(dir);
   intializeSongList();
   printf("Number of songs: %d\n", numEntries);
