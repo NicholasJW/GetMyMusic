@@ -13,7 +13,6 @@ static char* songList[MAX_NUM_RECORDS]; // list of song:sha pairings in local da
 static int numEntries; // number of entries in local database
 
 
-
 /****************************************************************************************************************
 * Opens the local database where song:SHA pairings are stored and stores them in the classwide array.
 * Parameter is the filename of the local database. If the filename is not found an error message is displayed

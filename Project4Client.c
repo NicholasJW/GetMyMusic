@@ -268,7 +268,7 @@ int main (int argc, char *argv[])
 
 		else if (strcmp(command, "diff") == 0)
 		{
-			printf("ENTERED DIFF!!!\n");
+			// printf("ENTERED DIFF!!!\n");
 			// send LIST message to server
 			sendLIST(sock);
 
@@ -384,7 +384,7 @@ int main (int argc, char *argv[])
 				// send PULL message
 				sendPULL(sock, SHA);
 
-				printf("SENT PULL MESSAGE!!!\n");
+				// printf("SENT PULL MESSAGE!!!\n");
 
 				// receive pullResponse message from server
 				char pullResponse[BUFFSIZE]; // create pullResponse
@@ -398,7 +398,7 @@ int main (int argc, char *argv[])
 				// song file length is precisely length field in pullResponse
 				int songLength = retrieveLength(pullResponse);
 
-				printf("pulled song length: %i\n", songLength);
+				// printf("pulled song length: %i\n", songLength);
 
 				// store song in database
 				storeSong(songName, song, songLength); // stores song file in this directory
@@ -515,7 +515,7 @@ void sendPUSH(int sock, unsigned long messageLen, char* songName, char* SHA, cha
 	strcpy(pushMessage, PUSHType);
 
 	// append message length
-	printf("ORIGINAL messageLen: %lu\n", messageLen); // DEBUGGING
+	// printf("ORIGINAL messageLen: %lu\n", messageLen); // DEBUGGING
 	pushMessage[5] = (uint16_t)messageLen;
 	pushMessage[4] = (uint16_t)messageLen >> 8;
 			
@@ -541,12 +541,12 @@ void sendPUSH(int sock, unsigned long messageLen, char* songName, char* SHA, cha
 		pushMessage[4+2+MAX_SONGNAME_LENGTH+SHA_LENGTH+i] = songFile[i];
 	}
 
-	printf("push Message SENT: ");
-	for (i = 0; i < 4+2+MAX_SONGNAME_LENGTH+SHA_LENGTH+songSize; i++)
-	{
-		printf("%c", pushMessage[i]);
-	}
-	printf("\n");
+	// printf("push Message SENT: ");
+	// for (i = 0; i < 4+2+MAX_SONGNAME_LENGTH+SHA_LENGTH+songSize; i++)
+	// {
+	// 	printf("%c", pushMessage[i]);
+	// }
+	// printf("\n");
 
 	// send pushMessage to server
 	ssize_t numBytes = send(sock, pushMessage, 4+2+MAX_SONGNAME_LENGTH+SHA_LENGTH+songSize, 0);
@@ -567,7 +567,7 @@ void sendPULL(int sock, char* SHA)
 	pullMessage[5] = (uint16_t)SHA_LENGTH;
 	pullMessage[4] = (uint16_t)SHA_LENGTH >> 8;
 
-	printf("length of pull message sent: %lu\n", retrieveLength(pullMessage));
+	// printf("length of pull message sent: %lu\n", retrieveLength(pullMessage));
 
 	// append SHA to pullMessage
 	int k;
@@ -576,12 +576,12 @@ void sendPULL(int sock, char* SHA)
 		pullMessage[4+2+k] = SHA[k];
 	}
 
-	printf("pull Message SENT: ");
-	for (k = 0; k < 4+2+SHA_LENGTH; k++)
-	{
-		printf("%c", pullMessage[k]);
-	}
-	printf("\n");
+	// printf("pull Message SENT: ");
+	// for (k = 0; k < 4+2+SHA_LENGTH; k++)
+	// {
+	// 	printf("%c", pullMessage[k]);
+	// }
+	// printf("\n");
 
 	// send the PULL message to the server
 	ssize_t numBytes = send(sock, pullMessage, 4+2+SHA_LENGTH, 0);

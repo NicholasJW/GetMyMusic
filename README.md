@@ -1,19 +1,18 @@
 # GetMyMusic
+## Authors: Tianchang Yang, Wallace He and Nicholas Wan
 
 # Description:
 
 GetMyMusic is a file/music synchronization application
 that enables multiple machines to ensure that they have the same files in their music directory.
 
-
-
 ## Structure: 
 
-We put the song into the data.dat files. server and client would have different databse files.  
+We put the summary of songs into the data.dat files which contains song names and coreresponding SHAs. One database file correponds to one music directory and both server and client get its local music information from databse file.  
 
 ### Server: 
 
-server would wait for the client to respond, in order to handle the muti-Clients, we used Pthread_detach function. 
+server would wait for the client to respond, in order to handle the muti-Clients, we used Pthread function. 
 
 After server recieved the messages from Client, we will parse the message inside of our helper function: 
 handle the client.
